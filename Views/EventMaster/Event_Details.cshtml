@@ -1,0 +1,46 @@
+﻿@model EventsMVC.Models.EventDTO
+
+@{
+	ViewData["Title"] = "Details";
+	Layout = "~/Views/Shared/_UserNavbar.cshtml";
+}
+<link rel="stylesheet" href="~/css/EventDetails.css" asp-append-version="true" />
+<main>
+	<div class="card">
+		<div class="card__title">
+			<div class="icon">
+				<a href="javascript:history.back()"><i class="fa fa-arrow-left"></i></a>
+			</div>
+			<h3>Event Details</h3>
+		</div>
+		<div class="card__body">
+			<div class="half">
+				<div class="featured_text">
+					<h1>@ViewBag.EventName</h1>
+					<p class="sub">@ViewBag.Date</p>
+					<p class="price">₹ @ViewBag.Price</p>
+				</div>
+				<div class="image">
+					<img src="~/Uploads/@ViewBag.ImageFile" alt="">
+				</div>
+			</div>
+			<div class="half">
+				<div class="description">
+					<p>@ViewBag.Desciption</p>
+				</div>
+
+			</div>
+		</div>
+		<div class="card__footer">
+			<div class="recommend">
+				<h3>Participant Now</h3>
+			</div>
+			<div class="action">
+				<a asp-action="Participant" asp-route-id="@ViewBag.EventID">
+					<button type="button">Participant</button>
+				</a>
+
+			</div>
+		</div>
+	</div>
+</main>

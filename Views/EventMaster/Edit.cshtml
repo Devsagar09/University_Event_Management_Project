@@ -1,0 +1,58 @@
+﻿@model EventsMVC.Models.EventDTO
+
+@{
+    ViewData["Title"] = "Edit Event";
+    Layout = "~/Views/Shared/_AdminNavbar.cshtml";
+}
+
+<h1>Edit Event</h1>
+
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+
+    <div class="form-group">
+        <label asp-for="EventName" class="control-label"></label>
+        <input asp-for="EventName" class="form-control" />
+        <span asp-validation-for="EventName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description" class="control-label"></label>
+        <input asp-for="Description" class="form-control" />
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Date" class="control-label"></label>
+        <input type="date" asp-for="Date" class="form-control" />
+        <span asp-validation-for="Date" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Price" class="control-label"></label>
+        <input asp-for="Price" class="form-control" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CategoryId" class="control-label">Category</label>
+        <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryID">
+            <option value="">-- Select a category --</option>
+        </select>
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <img src="~/Uploads/@ViewBag.ImageFile" alt="@ViewBag.ImageFile" width="100" height="100" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Image" class="control-label">Event Image</label>
+        <input type="file" asp-for="Image" class="form-control-file" />
+        <span asp-validation-for="Image" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Edit" class="btn btn-primary" />
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

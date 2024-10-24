@@ -1,0 +1,62 @@
+﻿@model CountViewModel
+
+@{
+	ViewData["Title"] = "Dashboard";
+	Layout = "~/Views/Shared/_AdminNavbar.cshtml";
+}
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-3 col-sm-4">
+			<div class="counter">
+				<div class="counter-content">
+					<div class="counter-icon">
+						<i class="fa fa-users"></i>
+					</div>
+					<h3>Users</h3>
+				</div>
+				<span class="counter-value">@Model.UserCount</span>
+			</div>
+		</div>
+		<div class="col-md-3 col-sm-4">
+			<div class="counter green">
+				<div class="counter-content">
+					<div class="counter-icon">
+						<i class="fa fa-user"></i>
+					</div>
+					<h3>Admin</h3>
+				</div>
+				<span class="counter-value">@Model.Adminount</span>
+			</div>
+		</div>
+		<div class="col-md-3 col-sm-4">
+			<div class="counter green">
+				<div class="counter-content">
+					<div class="counter-icon">
+						<i class="fa fa-chart-simple"></i>
+					</div>
+					<h3>Total</h3>
+				</div>
+				<span class="counter-value">@Model.TotalUserCount</span>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+
+<script>
+	$(document).ready(function () {
+		$('.counter-value').each(function () {
+			$(this).prop('Counter', 0).animate({
+				Counter: $(this).text()
+			}, {
+				duration: 3500,
+				easing: 'swing',
+				step: function (now) {
+					$(this).text(Math.ceil(now));
+				}
+			});
+		});
+	});
+</script>

@@ -1,0 +1,56 @@
+﻿@model IEnumerable<EventsMVC.Models.EventMaster>
+
+@{
+    ViewData["Title"] = "In_door";
+    Layout = "~/Views/Shared/_UserNavbar.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/Home.css" asp-append-version="true" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<div class="container page-wrapper">
+    <div class="page-inner">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                if (item.CategoryId == 1)
+                {
+                    <form asp-action="Favorite" asp-route-id="@item.EventId">
+                        <div class="el-wrapper">
+                            <a asp-action="Event_Details" asp-route-id="@item.EventId">
+                                <div class="box-up">
+                                    <img class="img" src="~/Uploads/@item.EventImage" alt="@item.EventName">
+                                    <div class="img-info">
+                                        <div class="info-inner">
+                                            <span class="p-name">@item.EventName</span>
+                                            <span class="p-company">@item.Date</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="box-down">
+                                <div class="h-bg">
+                                    <div class="h-bg-inner"></div>
+                                </div>
+                                <button type="submit" class="cart">
+                                    <span class="price">Rs. @item.Price</span>
+                                    <span class="add-to-cart">
+                                        <span class="txt">Add to Favorite</span>
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                }
+            }
+        </div>
+    </div>
+</div>
+
+@Html.Partial("~/Views/Shared/_Footer.cshtml")
+
+
+
+

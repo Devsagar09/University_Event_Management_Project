@@ -1,0 +1,37 @@
+﻿@model IEnumerable<EventsMVC.Models.EventCategory>
+
+@{
+    ViewData["Title"] = "Index";
+	Layout = "~/Views/Shared/_AdminNavbar.cshtml";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="~/css/Index.css" asp-append-version="true" />
+
+<div class="container">
+	<h2>Categories</h2>
+	<table id="user-table">
+		<thead>
+			<tr>
+				<th>@Html.DisplayNameFor(model => model.CategoryName)</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody> 
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>@Html.DisplayFor(modelItem => item.CategoryName)</td>
+					<td>
+						<a asp-action="Details" asp-route-id="@item.CategoryId"><i class="fa fa-eye"></i></a>
+						<a asp-action="Edit" asp-route-id="@item.CategoryId"><i class="fa-solid fa-pen-to-square"></i></a>
+						<a asp-action="Delete" id="myBtn" asp-route-id="@item.CategoryId"><i class="fa fa-trash"></i></a>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+
+
+
+</div>

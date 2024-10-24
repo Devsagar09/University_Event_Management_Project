@@ -1,0 +1,140 @@
+﻿@model IEnumerable<EventsMVC.Models.HistoryTable>
+
+@{
+    ViewData["Title"] = "Favorite Events";
+    Layout = "~/Views/Shared/_UserNavbar.cshtml";
+    int currentUserId = ViewBag.UserID ?? 0;
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+<style>
+    <style >
+    .favorite-container {
+        max-width: 800px;
+        margin: auto;
+        padding: 20px;
+        margin-top:20px;
+    }
+
+    .favorite-item {
+        display: flex;
+        align-items: center;
+        padding: 20px;
+        border-bottom: 1px solid #ddd;
+        background-color: #f9f9f9;
+        margin-bottom: 15px;
+        margin-left:50px;
+        margin-right:50px;
+        border-radius: 8px;
+        transition: transform 0.3s, box-shadow 0.3s, opacity 0.5s;
+    }
+
+        .favorite-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .favorite-item img {
+            width: 200px;
+            height: auto;
+            border-radius: 8px;
+            margin-right: 20px;
+        }
+
+    .favorite-details {
+        flex-grow: 1;
+    }
+
+        .favorite-details h3 {
+            margin: 0;
+            font-size: 1.8em;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .favorite-details p {
+            margin: 5px 0;
+            font-size: 1.2em;
+            color: #666;
+        }
+
+    .favorite-actions {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+        .favorite-actions a {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: #fff;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+            .favorite-actions a i {
+                margin-left: 5px;
+            }
+
+            .favorite-actions a.btn-primary {
+                background-color: #007bff;
+            }
+
+                .favorite-actions a.btn-primary:hover {
+                    background-color: #0056b3;
+                }
+
+            .favorite-actions a.btn-danger {
+                background-color: #dc3545;
+            }
+
+                .favorite-actions a.btn-danger:hover {
+                    background-color: #c82333;
+                }
+
+    .no-favorites {
+        text-align: center;
+        padding: 20px;
+        font-size: 1.5em;
+        color: #666;
+    }
+</style>
+
+</style>
+
+<div class="favorite-container">
+    @if (!Model.Any())
+    {
+        <div class="no-favorites">
+            No Added In Favorite
+        </div>
+    }
+    else
+    {
+        @foreach (var item in Model)
+        {
+            @if (item.UserId == currentUserId)
+            {
+                <div class="favorite-item" id="favorite-item-@item.HistoryId">
+                    <img src="~/Uploads/@item.Event.EventImage" alt="@item.Event.EventName" />
+                    <div class="favorite-details">
+                        <h3>@item.Event.EventName</h3>
+                        <p>Price: Rs. @item.Event.Price</p>
+                        <p>Date: @item.Event.Date</p>
+                    </div>
+                    <div class="favorite-actions">
+                        <a asp-action="Event_Details" asp-route-id="@item.EventId" class="btn btn-primary">View <i class="fa-solid fa-eye"></i></a>
+                        <a asp-action="RemoveFavorite" asp-route-id="@item.HistoryId" class="btn btn-danger">Remove <i class="fa-solid fa-trash-can"></i></a>
+                    </div>
+                </div>
+            }
+        }
+    }
+</div>

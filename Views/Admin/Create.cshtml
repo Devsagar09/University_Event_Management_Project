@@ -1,0 +1,55 @@
+﻿@model EventsMVC.Models.UserMaster
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_AdminNavbar.cshtml";
+}
+<link rel="stylesheet" href="~/css/Create.css" asp-append-version="true" />
+
+<div class="card-container">
+    <div class="toggle">
+    </div>
+    <div class="card login-register login-reset">
+        <h1 class="title">Add User</h1>
+        <form asp-action="Create">
+            <div class="input-container has-feedback">
+                <input type="text" id="Username" asp-for="FullName" placeholder="FullName" />
+                <div class="bar"></div>
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+
+            <div class="input-container has-feedback">
+                <input type="email" id="E-mail" asp-for="Email" placeholder="Email" />
+                <div class="bar"></div>
+            </div>
+
+            <div class="input-container has-feedback">
+                <input type="password" id="Password" asp-for="Password" placeholder="Password" />
+                <div class="bar"></div>
+            </div>
+
+            <div class="input-container has-feedback">
+                <input type="text" id="Address" asp-for="Address" placeholder="Address" />
+                <div class="bar"></div>
+            </div>
+
+            <div class="input-container has-feedback">
+                <select asp-for="RoleId" class="form-select" asp-items="ViewBag.RoleId">
+                    <option value="">-- Select a Roles --</option>
+                </select>
+          
+            </div>
+
+
+            <div class="button-container">
+                <button type="submit" value="Create" class="rkmd-btn btn-lightBlue ripple-effect float-right"><span>Add</span></button>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

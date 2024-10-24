@@ -1,0 +1,55 @@
+﻿@model EventsMVC.Models.ParticipantTable
+
+@{
+	ViewData["Title"] = "Participant";
+	Layout = "~/Views/Shared/_UserNavbar.cshtml";
+}
+
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+
+<div class="container mt-5">
+	<div class="row justify-content-center">
+		<div class="col-md-6">
+			<div class="card">
+				<div class="card-header text-center">
+					<h1>Participant</h1>
+				</div>
+				<div class="card-body">
+					@using (Html.BeginForm())
+					{
+						@Html.AntiForgeryToken()
+
+						@Html.HiddenFor(model => model.UserId)
+						@Html.HiddenFor(model => model.EventId)
+						@Html.HiddenFor(model => model.Date)
+
+						<div class="form-group">
+							<label><b>User Email</b></label>
+							<p class="form-control-plaintext">@ViewBag.UserEmail</p>
+						</div>
+						<div class="form-group">
+							<label><b>Event Name</b></label>
+							<p class="form-control-plaintext">@ViewBag.Eventname</p>
+						</div>
+						<div class="form-group">
+							<label><b>Participation Date</b></label>
+							<p class="form-control-plaintext">@Html.DisplayFor(model => model.Date)</p>
+						</div>
+
+						<div class="text-center">
+							<a asp-action="Payment" asp-route-id="@Model.EventId" class="btn btn-primary">
+								Payment ₹@ViewBag.Price
+							</a>
+						</div>
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

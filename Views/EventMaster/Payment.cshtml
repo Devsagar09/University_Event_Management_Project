@@ -1,0 +1,53 @@
+﻿@model EventsMVC.Models.PaymentTable
+
+@{
+    ViewData["Title"] = "Payment";
+    Layout = "~/Views/Shared/_UserNavbar.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/Payment.css" asp-append-version="true" />
+
+<div class="mainscreen">
+
+    <div class="card">
+        <div class="leftside">
+            <img src="@ViewBag.Image"
+                 class="product"
+                 alt="@ViewBag.Eventname" />
+        </div>
+        <div class="rightside">
+            <form asp-action="Payment">
+                <h1>CheckOut</h1>
+                <h2>Payment Information</h2>
+                <p>Cardholder Name</p>
+                <input type="text" class="inputbox" name="name" asp-for="CardholderName" required />
+                <span asp-validation-for="CardholderName" class="text-danger"></span>
+
+                <p>Card Number</p>
+                <input type="number" asp-for="Card_Number" class="inputbox" name="card_number" id="card_number" required />
+                <span asp-validation-for="Card_Number" class="text-danger"></span>
+
+                <p>Card Type</p>
+                <select class="inputbox" asp-for="Card_Type" name="card_type" id="card_type" required>
+                    <option value="">--Select a Card Type--</option>
+                    <option value="Visa">Visa</option>
+                    <option value="RuPay">RuPay</option>
+                    <option value="MasterCard">MasterCard</option>
+                </select>
+                <span asp-validation-for="Card_Type" class="text-danger"></span>
+                <div class="expcvv">
+
+                    <p class="expcvv_text">Expiry</p>
+                    <input type="date" asp-for="Expiry" class="inputbox" name="exp_date" id="exp_date" required />
+
+                    <p class="expcvv_text2">CVV</p>
+                    <input type="password" class="inputbox" asp-for="CVV" name="cvv" id="cvv" required />
+                </div>
+                <p></p>
+                <button type="submit" class="button">CheckOut</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+

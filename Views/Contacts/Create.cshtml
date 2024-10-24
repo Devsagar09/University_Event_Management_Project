@@ -1,0 +1,75 @@
+﻿@model EventsMVC.Models.ContactTable
+
+@{
+	ViewData["Title"] = "Contact";
+	Layout = "~/Views/Shared/_UserNavbar.cshtml";
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+<link rel="stylesheet" href="~/css/Contact.css" asp-append-version="true" />
+
+
+
+<div class="container">
+
+	<div class="text-center">
+		<h1 class="heading">Contact Us</h1>
+		<div>
+			Touch with us. Write down your query regrading to our service and our System.
+
+		</div>
+	</div>
+</div>
+<div class="content">
+	<div class="col-1">
+		<div class="address-line">
+			<i class="fa-sharp fa-solid fa-location-dot icon"></i>
+			<div class="contact-info">
+				<div class="contact-info-title">Address</div>
+				<div class="user-details">B-71 , Viramnagar Society,<br />Ved-Road, Surat,<br />395004.</div>
+
+			</div>
+		</div>
+		<div class="address-line">
+			<i class="fa-solid fa-phone icon"></i>
+			<div class="contact-info">
+				<div class="contact-info-title">Phone</div>
+				<div class="user-details">+91 73594 90036</div>
+			</div>
+		</div>
+		<div class="address-line">
+			<i class="fa-solid fa-envelope icon"></i>
+			<div class="contact-info">
+				<div class="contact-info-title">Email</div>
+				<div class="user-details">d&devent9@gmail.com</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-2">
+		<form asp-action="Create">
+			<div class="form-container">
+				<h2>Send Message</h2>
+				<div class="form-row">
+					<div>
+						<input type="text" asp-for="FullName" class="form-field" placeholder="Full Name" required>
+						<span asp-validation-for="FullName" class="text-danger"></span>
+					</div>
+				</div>
+				<div class="form-row">
+					<div>
+						<input type="text" asp-for="Email" class="form-field" placeholder="Email" required>
+						<span asp-validation-for="Email" class="text-danger"></span>
+					</div>
+				</div>
+				<div class="form-row">
+					<div>
+						<input type="text" class="form-field" asp-for="Query" placeholder="Type your message" required>
+						<span asp-validation-for="Query" class="text-danger"></span>
+					</div>
+				</div>
+				<button type="submit" class="send-btn" value="Send">Send</button>
+			</div>
+		</form>
+	</div>
+</div>
+</div>

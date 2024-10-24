@@ -1,0 +1,193 @@
+﻿@model IEnumerable<EventsMVC.Models.EventMaster>
+
+@{
+	ViewData["Title"] = "Home Page";
+	Layout = "~/Views/Shared/_UserNavbar.cshtml";
+}
+<link rel="stylesheet" href="~/css/Home.css" asp-append-version="true" />
+
+
+<div class="user_name">
+	Welcome <b>@ViewBag.UserEmail</b>
+</div>
+
+
+<div class="splitview skewed">
+	<div class="panel bottom">
+		<div class="content">
+			<div class="description">
+				<h1 class="eventheading">Non-Tech Events</h1>
+				<h4 class="eventheading">You can book in any events</h4>
+				<p>Fast Participant In your desireable event</p>
+			</div>
+
+			<img src="https://t4.ftcdn.net/jpg/03/65/40/15/360_F_365401520_zLTViwtTegqkr11c5uBElk8SfgTL8Uty.jpg" alt="Non-tech event">
+		</div>
+	</div>
+
+	<div class="panel top">
+		<div class="content">
+			<div class="description">
+				<h1 class="eventheading">Tech Event</h1>
+				<h4 class="eventheading">You can book in any events</h4>
+				<p>Fast Participant In your desireable event</p>
+			</div>
+
+			<img src="https://cdn.pixabay.com/photo/2017/08/10/08/47/laptop-2620118_640.jpg" alt="Tech-event">
+		</div>
+	</div>
+
+	<div class="handle"></div>
+</div>
+
+@* Main *@
+
+
+<a asp-controller="EventMaster" asp-action="Index3" class="styled-link">
+	<p class="Heading">Tech Events</p>
+</a>
+
+<div class="container page-wrapper">
+	<div class="page-inner">
+		<div class="row">
+			@foreach (var item in Model.Where(x => x.CategoryId == 3).Take(4))
+			{
+				<div class="el-wrapper">
+					<div class="box-up">
+						<img class="img" src="~/Uploads/@item.EventImage" alt="@item.EventName">
+						<div class="img-info">
+							<div class="info-inner">
+								<span class="p-name">@item.EventName</span>
+								<span class="p-company">@item.Date</span>
+							</div>
+						</div>
+					</div>
+
+					<div class="box-down">
+						<div class="h-bg">
+							<div class="h-bg-inner"></div>
+						</div>
+
+						<a class="cart" href="#">
+							<span class="price">Rs. @item.Price</span>
+							<span class="add-to-cart">
+								<span class="txt">Add to Favorite</span>
+							</span>
+						</a>
+					</div>
+				</div>
+
+			}
+		</div>
+	</div>
+</div>
+
+<a asp-controller="EventMaster" asp-action="In_door" class="styled-link">
+	<p class="Heading">In-Door Events</p>
+</a>
+
+<div class="container page-wrapper">
+	<div class="page-inner">
+		<div class="row">
+		@foreach (var item in Model.Where(x => x.CategoryId == 1).Take(4))
+		{
+			<div class="el-wrapper">
+				<div class="box-up">
+					<img class="img" src="~/Uploads/@item.EventImage" alt="@item.EventName">
+					<div class="img-info">
+						<div class="info-inner">
+							<span class="p-name">@item.EventName</span>
+							<span class="p-company">@item.Date</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="box-down">
+					<div class="h-bg">
+						<div class="h-bg-inner"></div>
+					</div>
+
+					<a class="cart" href="#">
+						<span class="price">Rs. @item.Price</span>
+						<span class="add-to-cart">
+							<span class="txt">Add to Favorite</span>
+						</span>
+					</a>
+				</div>
+			</div>
+
+		}
+		</div>
+	</div>
+</div>
+
+<a asp-controller="EventMaster" asp-action="out_door" class="styled-link">
+	<p class="Heading">Out-Door Events</p>
+</a>
+<div class="container page-wrapper">
+	<div class="page-inner">
+		<div class="row">
+			@foreach (var item in Model.Where(x => x.CategoryId == 2).Take(4))
+			{
+				<div class="el-wrapper">
+					<div class="box-up">
+						<img class="img" src="~/Uploads/@item.EventImage" alt="@item.EventName">
+						<div class="img-info">
+							<div class="info-inner">
+								<span class="p-name">@item.EventName</span>
+								<span class="p-company">@item.Date</span>
+							</div>
+						</div>
+					</div>
+
+					<div class="box-down">
+						<div class="h-bg">
+							<div class="h-bg-inner"></div>
+						</div>
+
+						<a class="cart" href="#">
+							<span class="price">Rs. @item.Price</span>
+							<span class="add-to-cart">
+								<span class="txt">Add to Favorite</span>
+							</span>
+						</a>
+					</div>
+				</div>
+
+			}
+		</div>
+	</div>
+</div>
+
+@Html.Partial("~/Views/Shared/_Footer.cshtml")
+
+
+
+<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		var parent = document.querySelector('.splitview'),
+			topPanel = parent.querySelector('.top'),
+			handle = parent.querySelector('.handle'),
+			skewHack = 0,
+			delta = 0;
+
+		// If the parent has .skewed class, set the skewHack var.
+		if (parent.className.indexOf('skewed') != -1) {
+			skewHack = 1000;
+		}
+
+		parent.addEventListener('mousemove', function (event) {
+			// Get the delta between the mouse position and center point.
+			delta = (event.clientX - window.innerWidth / 2) * 0.5;
+
+			// Move the handle.
+			handle.style.left = event.clientX + delta + 'px';
+
+			// Adjust the top panel width.
+			topPanel.style.width = event.clientX + skewHack + delta + 'px';
+		});
+	});
+</script>
+
+
+

@@ -1,0 +1,125 @@
+﻿body {
+    font-family: Arial;
+    background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20230316/pngtree-city-building-neon-background-image_1948832.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    backdrop-filter: blur(10px);
+}
+
+.heading{
+    color:#fff;
+}
+
+.container {
+    width: 950px;
+    margin: 80px auto;
+    color: white;
+    line-height: 1.5;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.content {
+    display: flex;
+    margin-top: 40px;
+}
+
+.icon {
+    background-color: white;
+    border-radius: 30px;
+    padding: 15px;
+    vertical-align: top;
+    color:#000;
+}
+
+.contact-info {
+    display: inline-block;
+    padding: 4px 20px 0px 20px;
+}
+
+.address-line {
+    margin-top: 40px;
+}
+
+.col-1 {
+    width: 530px;
+}
+
+.col-2 {
+    flex: 1 1 auto;
+    background-color: white;
+}
+
+.form-container {
+    color: #000;
+    padding: 30px;
+}
+
+.contact-info-title {
+    color: #fff;
+    font-weight: 900;
+}
+
+.user-details {
+    color: #fff;
+}
+
+.form-row {
+    margin-top:5px;
+    padding-bottom: 30px;
+}
+
+.form-field {
+    width: 100%;
+    padding:7px;
+    border: none;
+    border-bottom: 1px solid #000;
+}
+
+.send-btn {
+    border: 0px;
+    padding: 12px 26px;
+    background-color: #202ec9;
+    cursor:pointer;
+    color: white;
+}
+
+    .send-btn:hover{
+        opacity: 0.5;
+        transition: 0.3s ease;
+    }
+
+    @media all and (max-width: 1024px) {
+        .container {
+        width: auto;
+        padding: 30px;
+    }
+
+    .col-1 {
+        width: 360px;
+    }
+}
+
+@media all and (max-width: 700px) {
+    .content {
+        display: block;
+    }
+
+    .col-2 {
+        margin-top: 40px;
+    }
+
+    .col-1 {
+        width: 100%;
+    }
+}
+
+@media all and (max-width: 500px) {
+    .container {
+        padding: 10px;
+    }
+}

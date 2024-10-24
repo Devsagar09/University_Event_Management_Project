@@ -1,0 +1,47 @@
+﻿
+<link rel="stylesheet" href="~/css/UserNavbar.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Footer.css" asp-append-version="true" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+
+<nav>
+    <input type="checkbox" id="check">
+    <label for="check" class="checkbtn">
+        <i class="fas fa-bars"></i>
+    </label>
+    <label class="logo">D&D Events</label>
+    <ul>
+        <li><a class="active" asp-controller="Home" asp-action="Index">Home</a></li>
+
+        <li><a asp-controller="EventMaster" asp-action="Index3">Tech-Event</a></li>
+      
+        <li class="dropdown">
+            <a href="#">Non-Tech
+                <i class="fa fa-caret-down"></i>
+            </a>
+            <ul class="dropdown-content">
+                <li><a asp-controller="EventMaster" asp-action="In_door">In-Door</a></li>
+                <li><a asp-controller="EventMaster" asp-action="Out_door">Out-Door</a></li>
+            </ul>
+        </li>
+        <li><a asp-controller="ParticipantTables" asp-action="Index">Participant</a></li>
+        <li><a href="#">Payment</a></li>
+        <li><a asp-controller="FeedbackTables" asp-action="Create">Feedback</a></li>
+        <li><a asp-controller="Contacts" asp-action="Create">Contact Us</a></li>
+        <li><a asp-controller="EventMaster" asp-action="FavoriteList" title="Favorite"><i class="fa-regular fa-heart"></i></a></li>
+        <li><a asp-action="LogOut" asp-controller="UserMasters" title="Log-Out" onclick="return confirm('Do You want to Log-Out ?')"><i class="fa-solid fa-arrow-right-from-bracket"></i></a></li>
+         
+       
+    </ul>
+</nav>
+
+<div class="container">
+
+    @RenderBody()
+
+
+
+   
+</div>
+ 

@@ -1,0 +1,481 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"] - EventsMVC</title>
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/css/CountStyle.css" asp-append-version="true" />
+	
+	<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+	<style>
+		 
+		:root {
+			--white-color: #fff;
+			--blue-color: #4070f4;
+			--grey-color: #707070;
+			--grey-color-light: #aaa;
+		}
+
+		body {
+			transition: all 0.5s ease;
+			overflow-x: hidden; /* Remove horizontal scrollbar */
+		}
+
+			body.dark {
+				background-color: #333;
+			}
+
+			body.dark {
+				--white-color: #333;
+				--blue-color: #fff;
+				--grey-color: #f2f2f2;
+				--grey-color-light: #aaa;
+			}
+
+		/* navbar */
+		.navbar {
+			position: fixed;
+			top: 0;
+			width: 100%;
+			left: 0;
+			background-color: var(--white-color);
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: 15px 30px;
+			z-index: 1000;
+			box-shadow: 0 0 2px var(--grey-color-light);
+		}
+
+		.container {
+			margin-top: 60px;
+			margin-left: 260px; /* Adjusted margin to match expanded sidebar width */
+			padding: 20px;
+		}
+
+		.logo_item {
+			display: flex;
+			align-items: center;
+			column-gap: 10px;
+			font-size: 22px;
+			font-weight: 500;
+			color: var(--blue-color);
+		}
+
+		.navbar img {
+			width: 35px;
+			height: 35px;
+			border-radius: 50%;
+		}
+
+		.navbar_content {
+			display: flex;
+			align-items: center;
+			column-gap: 25px;
+		}
+
+			.navbar_content i {
+				cursor: pointer;
+				font-size: 20px;
+				color: var(--grey-color);
+			}
+
+		/* sidebar */
+		.sidebar {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 260px;
+			height: 100%;
+			padding: 80px 20px;
+			z-index: 100;
+			overflow-y: scroll;
+			box-shadow: 10px 10px 10px var(--grey-color-light);
+		}
+
+			.sidebar.close {
+				padding: 60px 0;
+				width: 80px;
+			}
+
+		.container.close {
+			margin-left: 80px; /* Adjusted margin to match collapsed sidebar width */
+		}
+
+
+
+
+		.sidebar::-webkit-scrollbar {
+			display: none;
+		}
+
+		.menu_content {
+			position: relative;
+		}
+
+		.menu_title {
+			margin: 15px 0;
+			padding: 0 20px;
+			font-size: 18px;
+		}
+
+		.sidebar.close .menu_title {
+			padding: 6px 30px;
+		}
+
+		.menu_title::before {
+			color: var(--grey-color);
+			white-space: nowrap;
+		}
+
+		.menu_dahsboard::before {
+			content: "Dashboard";
+		}
+
+		.menu_editor::before {
+			content: "Editor";
+		}
+
+		.menu_setting::before {
+			content: "Setting";
+		}
+
+		.sidebar.close .menu_title::before {
+			content: "";
+			position: absolute;
+			height: 2px;
+			width: 18px;
+			border-radius: 12px;
+			background: var(--grey-color-light);
+		}
+
+		.menu_items {
+			padding: 0;
+			list-style: none;
+		}
+
+		.navlink_icon {
+			position: relative;
+			font-size: 22px;
+			min-width: 50px;
+			line-height: 40px;
+			display: inline-block;
+			text-align: center;
+			border-radius: 6px;
+		}
+
+			.navlink_icon::before {
+				content: "";
+				position: absolute;
+				height: 100%;
+				width: calc(100% + 100px);
+				left: -20px;
+			}
+
+			.navlink_icon:hover {
+				background: var(--blue-color);
+			}
+
+		.sidebar .nav_link {
+			display: flex;
+			align-items: center;
+			width: 100%;
+			padding: 4px 15px;
+			border-radius: 8px;
+			text-decoration: none;
+			color: var(--grey-color);
+			white-space: nowrap;
+		}
+
+		.sidebar.close .navlink {
+			display: none;
+		}
+
+		.nav_link:hover {
+			color: var(--white-color);
+			background: var(--blue-color);
+		}
+
+		.sidebar.close .nav_link:hover {
+			background: var(--white-color);
+		}
+
+		.submenu_item {
+			cursor: pointer;
+		}
+
+		.submenu {
+			display: none;
+		}
+
+		.submenu_item .arrow-left {
+			position: absolute;
+			right: 10px;
+			display: inline-block;
+			margin-right: auto;
+		}
+
+		.sidebar.close .submenu {
+			display: none;
+		}
+
+		.show_submenu ~ .submenu {
+			display: block;
+		}
+
+		.show_submenu .arrow-left {
+			transform: rotate(90deg);
+		}
+
+		.submenu .sublink {
+			padding: 15px 15px 15px 52px;
+		}
+
+		.bottom_content {
+			position: fixed;
+			bottom: 60px;
+			left: 0;
+			width: 260px;
+			cursor: pointer;
+			transition: all 0.5s ease;
+		}
+
+		.bottom {
+			position: absolute;
+			display: flex;
+			align-items: center;
+			left: 0;
+			justify-content: space-around;
+			padding: 18px 0;
+			text-align: center;
+			width: 100%;
+			color: var(--grey-color);
+			border-top: 1px solid var(--grey-color-light);
+			background-color: var(--white-color);
+		}
+
+			.bottom i {
+				font-size: 20px;
+			}
+
+			.bottom span {
+				font-size: 18px;
+			}
+
+		.sidebar.close .bottom_content {
+			width: 50px;
+			left: 15px;
+		}
+
+		.sidebar.close .bottom span {
+			display: none;
+		}
+
+		.sidebar.hoverable .collapse_sidebar {
+			display: none;
+		}
+
+		#sidebarOpen {
+			display: none;
+		}
+	</style>
+
+</head>
+<body>
+	<header>
+		<nav class="navbar">
+			<div class="logo_item">
+				<i class="bx bx-menu" id="sidebarOpen"></i>
+				Admin Panel
+			</div>
+			<div class="navbar_content">
+				<i class="bi bi-grid"></i>
+				<i class='bx bx-sun' id="darkLight"></i>
+				<a asp-controller="Home" asp-action="Index" title="Go to Web"><i class='bx bx-globe'></i></a>
+				
+			</div>
+		</nav>
+		<!-- sidebar -->
+		<nav class="sidebar">
+			<div class="menu_content">
+				<ul class="menu_items">
+					<div class="menu_title menu_dahsboard"></div>
+					<!-- duplicate or remove this li tag if you want to add or remove navlink with submenu -->
+					<!-- start -->
+					<li class="item">
+						<a asp-controller="Admin" asp-action="DisplayCounts" class="nav_link">
+							<span class="navlink_icon">
+								<i class='bx bx-home-alt'></i>
+							</span>
+							<span class="navlink">Home</span>
+						</a>
+					</li>
+
+					<!-- start -->
+					<li class="item">
+						<div href="#" class="nav_link submenu_item">
+							<span class="navlink_icon">
+								<i class="bx bx-user"></i>
+							</span>
+							<span class="navlink">Manage User</span>
+							<i class="bx bx-chevron-right arrow-left"></i>
+						</div>
+						<ul class="menu_items submenu">
+							<a asp-controller="Admin" asp-action="Create" class="nav_link sublink">Add User</a>
+							<a asp-controller="Admin" asp-action="Index" class="nav_link sublink">Display User</a>
+						</ul>
+					</li>
+					<!-- end -->
+				</ul>
+				<ul class="menu_items">
+
+					<!-- duplicate these li tag if you want to add or remove navlink only -->
+
+					<li class="item">
+						<div href="#" class="nav_link submenu_item">
+							<span class="navlink_icon">
+								<i class='bx bx-group'></i>
+							</span>
+							<span class="navlink">Manage Role</span>
+							<i class="bx bx-chevron-right arrow-left"></i>
+						</div>
+						<ul class="menu_items submenu">
+							<a asp-controller="RoleTable" asp-action="Create" class="nav_link sublink">Add Role</a>
+							<a asp-controller="RoleTable" asp-action="Index" class="nav_link sublink">Display Role</a>
+						</ul>
+					</li>
+
+					<li class="item">
+						<div href="#" class="nav_link submenu_item">
+							<span class="navlink_icon">
+								<i class='bx bx-customize'></i>
+							</span>
+							<span class="navlink">Event Category</span>
+							<i class="bx bx-chevron-right arrow-left"></i>
+						</div>
+						<ul class="menu_items submenu">
+							<a asp-controller="Category" asp-action="Create" class="nav_link sublink">Add Category</a>
+							<a asp-controller="Category" asp-action="Index" class="nav_link sublink">Display Category</a>
+						</ul>
+					</li>
+
+					<li class="item">
+						<div href="#" class="nav_link submenu_item">
+							<span class="navlink_icon">
+								<i class='bx bxl-dribbble'></i>
+							</span>
+							<span class="navlink">Manage Event</span>
+							<i class="bx bx-chevron-right arrow-left"></i>
+						</div>
+						<ul class="menu_items submenu">
+							<a asp-controller="EventMaster" asp-action="Create" class="nav_link sublink">Add Event</a>
+							<a asp-controller="EventMaster" asp-action="Tech_event" class="nav_link sublink">Display Tech Event</a>
+							<a asp-controller="EventMaster" asp-action="Index" class="nav_link sublink">Display In-door Event</a>
+							<a asp-controller="EventMaster" asp-action="Index2" class="nav_link sublink">Display Out-door Event</a>
+						</ul>
+					</li>
+
+					<li class="item">
+						<a asp-controller="ParticipantTables" asp-action="Admin" class="nav_link">
+							<span class="navlink_icon">
+								<i class="fa fa-users-viewfinder"></i>
+							</span>
+							<span class="navlink">Participants</span>
+						</a>
+					</li>
+
+
+					<li class="item">
+						<a href="#" class="nav_link">
+							<span class="navlink_icon">
+								<i class='bx bx-rupee'></i>
+							</span>
+							<span class="navlink">Payment Details</span>
+						</a>
+					</li>
+
+					<li class="item">
+						<a asp-controller="FeedbackTables" asp-action="Index" class="nav_link">
+							<span class="navlink_icon">
+								<i class='bx bx-edit'></i>
+							</span>
+							<span class="navlink">Feedback</span>
+						</a>
+					</li>
+
+					<li class="item">
+						<a asp-controller="Contacts" asp-action="Index" class="nav_link">
+							<span class="navlink_icon">
+								<i class='bx bxs-contact'></i>
+							</span>
+							<span class="navlink">Contacts</span>
+						</a>
+					</li>
+				</ul>
+				<ul class="menu_items">
+
+					@if (User.Identity.IsAuthenticated)
+					{
+						<li class="item">
+							<a asp-action="LogOut" asp-controller="UserMasters" id="logoutLink" class="nav_link">
+								<span class="navlink_icon">
+									<i class='bx bx-log-out'></i>
+								</span>
+								<span class="navlink">Log-Out</span>
+							</a>
+						</li>
+					}
+				</ul>
+
+				<!-- Sidebar Open / Close -->
+				<div class="bottom_content">
+					<div class="bottom expand_sidebar">
+						@*  <span> Expand</span> *@
+						<i class='bx bx-caret-left'></i>
+					</div>
+					<div class="bottom collapse_sidebar">
+						@*   <span> Collapse</span> *@
+						<i class='bx bx-caret-right'></i>
+					</div>
+				</div>
+			</div>
+		</nav>
+	</header>
+	<div class="container">
+
+		@RenderBody()
+
+	</div>
+
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
+
+	<script>
+
+		document.addEventListener('DOMContentLoaded', function () {
+			var logoutLink = document.getElementById('logoutLink');
+			if (logoutLink) {
+				logoutLink.addEventListener('click', function (e) {
+					e.preventDefault(); // Prevent the default action of the link
+
+					// Show confirmation dialog
+					var confirmLogout = confirm("Are you sure you want to log out?");
+
+					// If user confirms logout, proceed with logout action
+					if (confirmLogout) {
+						window.location.href = this.href + "?confirmed=true"; // Add query parameter to indicate logout confirmation
+					}
+				});
+			}
+		});
+
+
+	</script>
+	@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

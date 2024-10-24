@@ -1,0 +1,72 @@
+﻿@model EventsMVC.Models.PaymentTable
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_AdminNavbar.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>PaymentTable</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="PaymentId" />
+            <div class="form-group">
+                <label asp-for="UserId" class="control-label"></label>
+                <select asp-for="UserId" class="form-control" asp-items="ViewBag.UserId"></select>
+                <span asp-validation-for="UserId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EventId" class="control-label"></label>
+                <select asp-for="EventId" class="form-control" asp-items="ViewBag.EventId"></select>
+                <span asp-validation-for="EventId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Date" class="control-label"></label>
+                <input asp-for="Date" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Amount" class="control-label"></label>
+                <input asp-for="Amount" class="form-control" />
+                <span asp-validation-for="Amount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CardholderName" class="control-label"></label>
+                <input asp-for="CardholderName" class="form-control" />
+                <span asp-validation-for="CardholderName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Card_Number" class="control-label"></label>
+                <input asp-for="Card_Number" class="form-control" />
+                <span asp-validation-for="Card_Number" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Card_Type" class="control-label"></label>
+                <input asp-for="Card_Type" class="form-control" />
+                <span asp-validation-for="Card_Type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Expiry" class="control-label"></label>
+                <input asp-for="Expiry" class="form-control" />
+                <span asp-validation-for="Expiry" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CVV" class="control-label"></label>
+                <input asp-for="CVV" class="form-control" />
+                <span asp-validation-for="CVV" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

@@ -1,0 +1,34 @@
+﻿@model EventsMVC.Models.RoleTable
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_AdminNavbar.cshtml";
+}
+<link rel="stylesheet" href="~/css/Create.css" asp-append-version="true" />
+<h1>Edit</h1>
+
+<div class="card-container">
+    <div class="toggle">
+    </div>
+    <div class="card login-register login-reset">
+        <h1 class="title">Add Category</h1>
+        <form asp-action="Edit">
+            <div class="input-container has-feedback">
+                <input type="text" id="Username" asp-for="RoleName" placeholder="Role" />
+                <div class="bar"></div>
+                <span asp-validation-for="RoleName" class="text-danger"></span>
+            </div>
+
+            <div class="button-container">
+                <button type="submit" value="Save" class="rkmd-btn btn-lightBlue ripple-effect float-right"><span>Add</span></button>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+ 
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
